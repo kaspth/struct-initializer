@@ -17,5 +17,3 @@ module Struct::Initializer
     end
   end
 end
-
-Object.include Struct::Initializer

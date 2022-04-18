@@ -4,7 +4,7 @@ require "test_helper"
 
 class Struct::InitializerTest < Minitest::Test
   def test_struct_initializer_with_positional_arguments
-    klass = Class.new do
+    klass = prepare_struct do
       struct :name, :greeting
     end
 
@@ -14,7 +14,7 @@ class Struct::InitializerTest < Minitest::Test
   end
 
   def test_struct_initializer_positional_argument_strictness
-    klass = Class.new do
+    klass = prepare_struct do
       struct :name, :greeting
     end
 
@@ -24,7 +24,7 @@ class Struct::InitializerTest < Minitest::Test
   end
 
   def test_struct_initializer_keyword_argument_strictness
-    klass = Class.new do
+    klass = prepare_struct do
       struct :name, :greeting, keyword_init: true
     end
 
@@ -34,7 +34,7 @@ class Struct::InitializerTest < Minitest::Test
   end
 
   def test_struct_initializer_with_keyword_arguments
-    klass = Class.new do
+    klass = prepare_struct do
       struct :name, :greeting, keyword_init: true
     end
 
@@ -44,7 +44,7 @@ class Struct::InitializerTest < Minitest::Test
   end
 
   def test_struct_initializer_with_extension
-    klass = Class.new do
+    klass = prepare_struct do
       struct :name
       attr_reader :greeting
 
@@ -60,7 +60,7 @@ class Struct::InitializerTest < Minitest::Test
   end
 
   def test_struct_initializer_with_visibility_change
-    klass = Class.new do
+    klass = prepare_struct do
       private struct :name, :greeting, keyword_init: true # Use funkiest syntax to test we're one-liner capable.
     end
 
@@ -71,4 +71,12 @@ class Struct::InitializerTest < Minitest::Test
     assert_equal "glenn", struct.send(:name)
     assert_equal "heyo",  struct.send(:greeting)
   end
+
+  private
+    def prepare_struct(&block)
+      Class.new do
+        extend Struct::Initializer
+        class_eval(&block)
+      end
+    end
 end
