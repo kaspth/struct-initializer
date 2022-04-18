@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+minitest
+
+AUTOINCLUDE=1 minitest

@@ -7,6 +7,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     minitest (5.15.0)
+    minitest-sprint (1.2.1)
+      path_expander (~> 1.1)
+    path_expander (1.1.0)
     rake (13.0.6)
 
 PLATFORMS
@@ -15,6 +18,7 @@ PLATFORMS
 
 DEPENDENCIES
   minitest (~> 5.0)
+  minitest-sprint
   rake (~> 13.0)
   struct-initializer!
 

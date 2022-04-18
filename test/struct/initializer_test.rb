@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Struct::InitializerTest < Minitest::Test
+class Struct::InitializerTest < Struct::Initializer::BaseTest
   def test_struct_initializer_with_positional_arguments
     klass = prepare_struct do
       struct :name, :greeting
@@ -71,12 +71,4 @@ class Struct::InitializerTest < Minitest::Test
     assert_equal "glenn", struct.send(:name)
     assert_equal "heyo",  struct.send(:greeting)
   end
-
-  private
-    def prepare_struct(&block)
-      Class.new do
-        extend Struct::Initializer
-        class_eval(&block)
-      end
-    end
 end
