@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/ruby/core_ext/struct/version"
+require_relative "lib/struct/initializer"
 
 Gem::Specification.new do |spec|
-  spec.name = "ruby-core_ext-struct"
-  spec.version = Ruby::CoreExt::Struct::VERSION
+  spec.name = "struct-initializer"
+  spec.version = Struct::Initializer::VERSION
   spec.authors = ["Kasper Timm Hansen"]
   spec.email = ["kaspth@gmail.com"]
 

@@ -1,10 +1,10 @@
-module RubyCoreExtStruct
+module Struct::Initializer
   def struct(*names, keyword_init: false)
-    include Initializer.new(names, keyword_init: keyword_init)
+    include Definition.new(names, keyword_init: keyword_init)
     names
   end
 
-  class Initializer < Module
+  class Definition < Module
     def initialize(names, keyword_init: false)
       attr_reader *names
       arguments = names.map { "#{_1}#{":" if keyword_init}" }.join(",")
@@ -18,4 +18,4 @@ module RubyCoreExtStruct
   end
 end
 
-Object.include RubyCoreExtStruct
+Object.include Struct::Initializer

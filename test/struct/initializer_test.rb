@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class RubyCoreExtStructTest < Minitest::Test
+class Struct::InitializerTest < Minitest::Test
   def test_struct_initializer_with_positional_arguments
     klass = Class.new do
       struct :name, :greeting
