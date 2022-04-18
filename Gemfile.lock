@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    struct-initializer (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.15.0)
+    rake (13.0.6)
+
+PLATFORMS
+  arm64-darwin-20
+  x86_64-linux
+
+DEPENDENCIES
+  minitest (~> 5.0)
+  rake (~> 13.0)
+  struct-initializer!
+
+BUNDLED WITH
+   2.3.11
