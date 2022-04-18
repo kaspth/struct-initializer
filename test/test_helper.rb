@@ -13,7 +13,6 @@ require "minitest/autorun"
 class Struct::Initializer::BaseTest < Minitest::Test
   private
     def prepare_struct(&block)
-      flunk unless ENV["AUTOINCLUDE"]
       Class.new do
         extend Struct::Initializer unless respond_to?(:struct)
         class_eval(&block)
