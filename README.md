@@ -1,22 +1,53 @@
-# Ruby::CoreExt::Struct
+# Struct::Initializer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby/core_ext/struct`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Reuse Struct.new's attr_reader and initialize generation in any class.
 
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add ruby-core_ext-struct
+    $ bundle add struct-initializer
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install ruby-core_ext-struct
+    $ gem install struct-initializer
 
 ## Usage
 
-TODO: Write usage instructions here
+Ruby's `Struct` class allows auto-generating public `attr_reader`'s and an `initialize` method based on the passed attributes, like so:
+
+```ruby
+class Greeter < Struct.new(:name, :greeting)
+end
+```
+
+But this only works with inheritance, so there's certain simple initializers that still have to be written manually. `Struct::Initializer` lifts the concept out of needing inheritance:
+
+```ruby
+class Greeter
+  extend Struct::Initializer
+  struct :name, :greeting
+end
+```
+
+Another benefit, you can also have the `attr_reader`'s be marked private, even with keyword arguments:
+
+```ruby
+class Greeter
+  extend Struct::Initializer
+  private struct :name, :greeting, keyword_init: true
+end
+```
+
+### Auto-include
+
+If you want `struct` available on any object automatically, change the require to:
+
+```ruby
+gem "struct-initializer", require: "struct/initializer/autoinclude"
+```
+
+This extends `Object` with the `struct` macro, so it's automatically available on any object and `extend Struct::Initializer` from above isn't needed.
 
 ## Development
 
@@ -26,7 +57,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby-core_ext-struct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kaspth/struct-initializer.
 
 ## License
 
