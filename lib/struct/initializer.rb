@@ -7,7 +7,7 @@ module Struct::Initializer
   class Definition < Module
     def initialize(names, keyword_init: false)
       attr_reader(*names)
-      arguments = names.map { "#{_1}#{":" if keyword_init}" }.join(",")
+      arguments = names.map { "#{_1}#{":" if keyword_init}" }.join(", ")
 
       class_eval <<~RUBY, __FILE__, __LINE__ + 1
         def initialize(#{arguments})
