@@ -13,6 +13,16 @@ class RubyCoreExtStructTest < Minitest::Test
     assert_equal "heyo",  struct.greeting
   end
 
+  def test_struct_initializer_positional_argument_strictness
+    klass = Class.new do
+      struct :name, :greeting
+    end
+
+    assert_raises { klass.new }
+    assert_raises { klass.new("glenn") }
+    assert_raises { klass.new("glenn", "heyo", "too much") }
+  end
+
   def test_struct_initializer_keyword_argument_strictness
     klass = Class.new do
       struct :name, :greeting, keyword_init: true
@@ -21,6 +31,16 @@ class RubyCoreExtStructTest < Minitest::Test
     assert_raises { klass.new }
     assert_raises { klass.new(name: "glenn") }
     assert_raises { klass.new(name: "glenn", greeting: "heyo", one_more: "for the road") }
+  end
+
+  def test_struct_initializer_with_keyword_arguments
+    klass = Class.new do
+      struct :name, :greeting, keyword_init: true
+    end
+
+    struct = klass.new(name: "glenn", greeting: "heyo")
+    assert_equal "glenn", struct.name
+    assert_equal "heyo",  struct.greeting
   end
 
   def test_struct_initializer_with_extension

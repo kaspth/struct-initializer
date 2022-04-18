@@ -6,17 +6,14 @@ module RubyCoreExtStruct
 
   class Initializer < Module
     def initialize(names, keyword_init: false)
-      if keyword_init
-        define_method :initialize do |**options|
-          names.each { instance_variable_set "@#{_1}", options[_1] }
-        end
-      else
-        define_method :initialize do |*args|
-          names.each_with_index { instance_variable_set "@#{_1}", args[_2] }
-        end
-      end
-
       attr_reader *names
+      arguments = names.map { "#{_1}#{":" if keyword_init}" }.join(",")
+
+      class_eval <<~RUBY, __FILE__, __LINE__ + 1
+        def initialize(#{arguments})
+          #{names.map { "@#{_1} = #{_1}" }.join("\n")}
+        end
+      RUBY
     end
   end
 end
