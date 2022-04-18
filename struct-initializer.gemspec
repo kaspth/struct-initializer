@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/struct/initializer"
+require_relative "lib/struct/initializer/version"
 
 Gem::Specification.new do |spec|
   spec.name    = "struct-initializer"
