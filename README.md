@@ -39,6 +39,16 @@ class Greeter
 end
 ```
 
+If the generated initializer needs to be refined, override `initialize` and call `super`:
+
+```ruby
+class Greeter
+  extend Struct::Initializer
+  struct :name, :greeting
+  def initialize(name, greeting = "heyo") = super
+end
+```
+
 ### Auto-include via Object core extension
 
 If you want `struct` available on any object automatically, change the require to:
