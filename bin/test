@@ -3,4 +3,4 @@ set -e
 
 bundle exec minitest
 
-AUTOINCLUDE=1 bundle exec minitest
+CORE_EXT=1 bundle exec minitest

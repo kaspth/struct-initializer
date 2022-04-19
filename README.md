@@ -39,15 +39,15 @@ class Greeter
 end
 ```
 
-### Auto-include
+### Auto-include via Object core extension
 
 If you want `struct` available on any object automatically, change the require to:
 
 ```ruby
-gem "struct-initializer", require: "struct/initializer/autoinclude"
+gem "struct-initializer", require: "struct/initializer/core_ext"
 ```
 
-This extends `Object` with the `struct` macro, so it's automatically available on any object and `extend Struct::Initializer` from above isn't needed.
+This extends `Object` itself with the `struct` macro, so `extend Struct::Initializer` from above isn't needed.
 
 ## Development
 
